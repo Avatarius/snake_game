@@ -4,9 +4,12 @@ import { Snake } from "./snake.js";
 let lastTimeRendered = 0;
 const board = document.querySelector(".game-board");
 const defaultSnakePosition = [
-  { x: 10, y: 11 }, // head
-  {x: 11, y: 11},
-  {x: 12, y: 11}, // tail
+  { x: 11, y: 11 },
+  {x: 10, y: 11},
+  {x: 9, y: 11},
+  {x: 8, y: 11},
+  {x: 7, y: 11},
+  {x: 6, y: 11},
 ];
 const snake = new Snake(defaultSnakePosition);
 let previousDirection = {x: 1, y: 0};
@@ -70,8 +73,8 @@ document.addEventListener("keydown", function (evt) {
 
   if (!isOppositeDirection && !isSameDirection) {
     snake.changeDirection(direction);
-    update();
-    draw();
+    // update();
+    // draw();
     previousDirection.x = direction.x;
     previousDirection.y = direction.y;
   }

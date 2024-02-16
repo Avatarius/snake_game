@@ -1,5 +1,3 @@
-`use strict`;
-
 class Snake {
   snakeSpeed = 2;
   currentDirection = { x: 1, y: 0 };
@@ -9,37 +7,38 @@ class Snake {
 w
 
   constructor(defaultSnakePosition) {
-    this.snakePositionObj = defaultSnakePosition.reverse();
+    this.snakePositionArray = defaultSnakePosition;
   }
 
   update() {
-    // если жмём наверх, то item.x += currentPosition.y
-    // если жмём вниз, то item.x += currentPosition.y * -1
-    // если жмём нелево, то item.y += currentPosition.x; * -1
-    // если жмём направо, то item.y += currentPosition.x
-    this.snakePositionObj.forEach((item, index) => {
-      const isMovingSameDirectionX = (this.currentDirection.x !== 0) && (this.currentDirection.x === this.previousDirection.x);
-      const isMovingSameDirectionY = (this.currentDirection.y !== 0) && (this.currentDirection.y === this.previousDirection.y);
-      const isMovingSameDirection = isMovingSameDirectionX || isMovingSameDirectionY;
-      if (index === 0 && !this.isStart) { // голова
-          item.x += this.currentDirection.x;
-          item.y += this.currentDirection.y;
-      } else if (!this.isStart && isMovingSameDirection) { // движение в том же направлении
+    console.log('update');
+    if (this.isStart) {
+      this.isStart = false;
+      return;
+    };
+    let previousItemX = this.snakePositionArray[0].x;
+    let previousItemY = this.snakePositionArray[0].y;
+
+    this.snakePositionArray.forEach((item, index) => {
+
+      if (index === 0) {
         item.x += this.currentDirection.x;
         item.y += this.currentDirection.y;
-      } else if (!this.isStart && !isMovingSameDirection) {// поворот
-        const rotateDirection = {x: 1, y: 0};
-        item.x += rotateDirection.x;
-        // item.y += rotateDirection.y;
+      } else {
+        // сохраняем позицию до изменений в переменные
+        const itemPositionX = item.x;
+        const itemPositionY = item.y;
+        // двигаем элемент на позицию прошлого элемента
+        item.x = previousItemX;
+        item.y = previousItemY;
+        // обновляем прошлую позицию
+        previousItemX = itemPositionX;
+        previousItemY = itemPositionY;
       }
-      // console.log(`current: ${JSON.stringify(this.currentDirection)}, previous: ${JSON.stringify(this.previousDirection)}`);
     });
-    this.isStart = false;
-    this.changeDirection(this.currentDirection);
-
   }
   draw(board) {
-    this.snakePositionObj.forEach((item) => {
+    this.snakePositionArray.forEach((item) => {
       // add new node
       const snakeTemplate = document.querySelector("#snake-template").content;
       const snakeElement = snakeTemplate
@@ -52,8 +51,8 @@ w
   }
 
   changeDirection(directionObj) {
-    this.previousDirection.x = this.currentDirection.x;
-    this.previousDirection.y = this.currentDirection.y;
+    // this.previousDirection.x = this.currentDirection.x;
+    // this.previousDirection.y = this.currentDirection.y;
 
     this.currentDirection.x = directionObj.x;
     this.currentDirection.y = directionObj.y;
