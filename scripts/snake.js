@@ -52,6 +52,12 @@ class Snake {
     this.currentDirection.x = directionObj.x;
     this.currentDirection.y = directionObj.y;
   }
+
+  checkIfOnSnake(obj) {
+    return (this.snakePositionArray[0].x === obj.x) && (this.snakePositionArray[0].y === obj.y);
+  }
+
+
 }
 
 export { Snake };

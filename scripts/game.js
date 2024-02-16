@@ -28,7 +28,15 @@ function startGame(currentTime) {
 
 function update() {
   snake.update();
-  food = new Food();
+  if (!food) {
+    food = new Food();
+  }
+  // проверить находится ли голова змеи и еда на одной позиции
+  if (snake.checkIfOnSnake(food)) {
+    food = undefined;
+  }
+  // console.log(`foodX: ${food.x}, foodY: ${food.y}`);
+  // console.log(`snake: ${JSON.stringify(snake.snakePositionArray)}`);
 }
 
 function draw() {
@@ -38,8 +46,10 @@ function draw() {
 
   const foodElement = board.querySelector('.food');
   if (foodElement) foodElement.remove();
-  food.draw(board);
+  if (food) food.draw(board);
+
 }
+
 
 //keyboard listener
 document.addEventListener("keydown", function (evt) {
