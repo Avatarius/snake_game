@@ -4,14 +4,13 @@ class Snake {
   previousDirection = {x: 1, y: 0};
   isStart = true;
 
-w
+
 
   constructor(defaultSnakePosition) {
     this.snakePositionArray = defaultSnakePosition;
   }
 
   update() {
-    console.log('update');
     if (this.isStart) {
       this.isStart = false;
       return;
@@ -20,7 +19,6 @@ w
     let previousItemY = this.snakePositionArray[0].y;
 
     this.snakePositionArray.forEach((item, index) => {
-
       if (index === 0) {
         item.x += this.currentDirection.x;
         item.y += this.currentDirection.y;
@@ -38,9 +36,9 @@ w
     });
   }
   draw(board) {
+    const snakeTemplate = document.querySelector("#snake-template").content;
     this.snakePositionArray.forEach((item) => {
       // add new node
-      const snakeTemplate = document.querySelector("#snake-template").content;
       const snakeElement = snakeTemplate
         .querySelector(".snake")
         .cloneNode(true);
@@ -51,9 +49,6 @@ w
   }
 
   changeDirection(directionObj) {
-    // this.previousDirection.x = this.currentDirection.x;
-    // this.previousDirection.y = this.currentDirection.y;
-
     this.currentDirection.x = directionObj.x;
     this.currentDirection.y = directionObj.y;
   }

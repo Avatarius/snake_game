@@ -1,5 +1,6 @@
 `use strict`;
 import { Snake } from "./snake.js";
+import { Food } from "./food.js";
 
 let lastTimeRendered = 0;
 const board = document.querySelector(".game-board");
@@ -12,6 +13,7 @@ const defaultSnakePosition = [
   {x: 6, y: 11},
 ];
 const snake = new Snake(defaultSnakePosition);
+let food;
 let previousDirection = {x: 1, y: 0};
 
 function startGame(currentTime) {
@@ -26,12 +28,17 @@ function startGame(currentTime) {
 
 function update() {
   snake.update();
+  food = new Food();
 }
 
 function draw() {
   const snakeElements = board.querySelectorAll(".snake");
   if (snakeElements) snakeElements.forEach((item) => item.remove());
   snake.draw(board);
+
+  const foodElement = board.querySelector('.food');
+  if (foodElement) foodElement.remove();
+  food.draw(board);
 }
 
 //keyboard listener
@@ -62,6 +69,7 @@ document.addEventListener("keydown", function (evt) {
     default:
       return;
   }
+  // TODO перенести эту логику в snake.changePosition()
   // check if opposite direction
   const isOppositeXDirection = (direction.x !== 0) && (direction.x === previousDirection.x * -1);
   const isOppositeYDirection = (direction.y !== 0) && (direction.y === previousDirection.y * -1);
