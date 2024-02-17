@@ -8,9 +8,9 @@ const defaultSnakePosition = [
   { x: 11, y: 11 },
   {x: 10, y: 11},
   {x: 9, y: 11},
-  {x: 8, y: 11},
-  {x: 7, y: 11},
-  {x: 6, y: 11},
+  // {x: 8, y: 11},
+  // {x: 7, y: 11},
+  // {x: 6, y: 11},
 ];
 const snake = new Snake(defaultSnakePosition);
 let food;
@@ -33,10 +33,10 @@ function update() {
   }
   // проверить находится ли голова змеи и еда на одной позиции
   if (snake.checkIfOnSnake(food)) {
-    food = undefined;
+    snake.expand();
+    food = null;
   }
-  // console.log(`foodX: ${food.x}, foodY: ${food.y}`);
-  // console.log(`snake: ${JSON.stringify(snake.snakePositionArray)}`);
+
 }
 
 function draw() {

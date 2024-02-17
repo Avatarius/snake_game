@@ -1,13 +1,16 @@
 class Snake {
-  snakeSpeed = 2;
+  snakeSpeed = 3;
   currentDirection = { x: 1, y: 0 };
   previousDirection = {x: 1, y: 0};
   isStart = true;
 
 
 
+
   constructor(defaultSnakePosition) {
     this.snakePositionArray = defaultSnakePosition;
+    this.previousTailPositionX = this.snakePositionArray.at(-1).x;
+    this.previousTailPositionY = this.snakePositionArray.at(-1).y;
   }
 
   update() {
@@ -17,6 +20,8 @@ class Snake {
     };
     let previousItemX = this.snakePositionArray[0].x;
     let previousItemY = this.snakePositionArray[0].y;
+    this.previousTailPositionX = this.snakePositionArray.at(-1).x;
+    this.previousTailPositionY = this.snakePositionArray.at(-1).y;
 
     this.snakePositionArray.forEach((item, index) => {
       if (index === 0) {
@@ -55,6 +60,11 @@ class Snake {
 
   checkIfOnSnake(obj) {
     return (this.snakePositionArray[0].x === obj.x) && (this.snakePositionArray[0].y === obj.y);
+  }
+
+  expand() {
+    this.snakePositionArray.push({x: this.previousTailPositionX, y: this.previousTailPositionY});
+    this.update();
   }
 
 
