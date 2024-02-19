@@ -64,7 +64,6 @@ class Snake {
 
   expand() {
     this.snakePositionArray.push({x: this.previousTailPositionX, y: this.previousTailPositionY});
-    this.update();
   }
 
 
