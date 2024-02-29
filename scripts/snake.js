@@ -1,18 +1,24 @@
+function _createDeepCopy(array) {
+  const newArray = [];
+  array.forEach((item, index) => {
+    newArray[index] = {x: item.x, y: item.y};
+  });
+  return newArray;
+}
+
 class Snake {
   snakeSpeed = 3;
   currentDirection = { x: 1, y: 0 };
   previousDirection = {x: 1, y: 0};
   isStart = true;
   constructor(defaultSnakePosition) {
-    console.log(defaultSnakePosition);
-    this.defaultSnakePosition = defaultSnakePosition.slice();
-    this.snakePositionArray = defaultSnakePosition.slice();
+    this.defaultSnakePosition = _createDeepCopy(defaultSnakePosition);
+    this.snakePositionArray = _createDeepCopy(defaultSnakePosition);
     this.previousTailPositionX = this.snakePositionArray.at(-1).x;
     this.previousTailPositionY = this.snakePositionArray.at(-1).y;
   }
 
   update() {
-    // console.log(this.defaultSnakePosition);
     if (this.isStart) {
       this.isStart = false;
       return;
@@ -66,8 +72,7 @@ class Snake {
   }
 
   reset() {
-    // this.snakePositionArray = this.defaultSnakePosition;
-    // console.log(this.defaultSnakePosition);
+    this.snakePositionArray = _createDeepCopy(this.defaultSnakePosition);
   }
 
 }
