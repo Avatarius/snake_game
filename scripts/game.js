@@ -5,9 +5,12 @@ import { Food } from "./food.js";
 let lastTimeRendered = 0;
 const board = document.querySelector(".game-board");
 const defaultSnakePosition = [
-  { x: 11, y: 11 },
+  /* { x: 11, y: 11 },
   {x: 10, y: 11},
-  {x: 9, y: 11},
+  {x: 9, y: 11}, */
+  {x: 3, y: 11},
+  {x: 2, y: 11},
+  {x: 1, y: 11},
 ];
 const snake = new Snake(defaultSnakePosition);
 let food;
@@ -18,6 +21,8 @@ const dialogForm = document.querySelector('.dialog__form');
 dialogForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
   snake.reset();
+  snake.changeDirection({x: 1, y: 0});
+  draw();
   dialog.close();
   // startGame();
 });
