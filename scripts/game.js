@@ -8,13 +8,19 @@ const defaultSnakePosition = [
   { x: 11, y: 11 },
   {x: 10, y: 11},
   {x: 9, y: 11},
-  // {x: 8, y: 11},
-  // {x: 7, y: 11},
-  // {x: 6, y: 11},
 ];
 const snake = new Snake(defaultSnakePosition);
 let food;
 let previousDirection = {x: 1, y: 0};
+
+const dialog = document.querySelector('.dialog');
+const dialogForm = document.querySelector('.dialog__form');
+dialogForm.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+  snake.reset();
+  dialog.close();
+  // startGame();
+});
 
 function startGame(currentTime) {
   window.requestAnimationFrame(startGame);
@@ -23,7 +29,22 @@ function startGame(currentTime) {
   lastTimeRendered = currentTime;
 
   update();
+  if (checkDefeat()) {
+    dialog.showModal();
+    return;
+  }
   draw();
+}
+
+function checkDefeat() {
+  const headPosition = snake.snakePositionArray.at(0);
+  const isOutOfBoard = headPosition.x > 21 || headPosition.x < 1 || headPosition.y > 21 || headPosition.y < 1;
+  const isSelfCollide = snake.snakePositionArray.some((item, index) => {
+    if (index !== 0) {
+      return item.x === headPosition.x && item.y === headPosition.y;
+    }
+  });
+  return isOutOfBoard || isSelfCollide;
 }
 
 function update() {
@@ -58,21 +79,25 @@ document.addEventListener("keydown", function (evt) {
   switch (key) {
     case "w":
     case "arrowup":
+      // console.log('up');
       direction.x = 0;
       direction.y = -1;
       break;
     case "s":
     case "arrowdown":
+      // console.log('down');
       direction.x = 0;
       direction.y = 1;
       break;
     case "a":
     case "arrowleft":
+      // console.log('left');
       direction.x = -1;
       direction.y = 0;
       break;
     case "d":
     case "arrowright":
+      // console.log('right');
       direction.x = 1;
       direction.y = 0;
       break;

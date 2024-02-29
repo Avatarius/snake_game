@@ -3,17 +3,16 @@ class Snake {
   currentDirection = { x: 1, y: 0 };
   previousDirection = {x: 1, y: 0};
   isStart = true;
-
-
-
-
   constructor(defaultSnakePosition) {
-    this.snakePositionArray = defaultSnakePosition;
+    console.log(defaultSnakePosition);
+    this.defaultSnakePosition = defaultSnakePosition.slice();
+    this.snakePositionArray = defaultSnakePosition.slice();
     this.previousTailPositionX = this.snakePositionArray.at(-1).x;
     this.previousTailPositionY = this.snakePositionArray.at(-1).y;
   }
 
   update() {
+    // console.log(this.defaultSnakePosition);
     if (this.isStart) {
       this.isStart = false;
       return;
@@ -66,6 +65,10 @@ class Snake {
     this.snakePositionArray.push({x: this.previousTailPositionX, y: this.previousTailPositionY});
   }
 
+  reset() {
+    // this.snakePositionArray = this.defaultSnakePosition;
+    // console.log(this.defaultSnakePosition);
+  }
 
 }
 

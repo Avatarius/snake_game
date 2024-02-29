@@ -34,3 +34,46 @@ body {
   border: 1px solid #000;
   background-color: #11b5b8;
 }
+
+.dialog {
+  padding: 35px;
+
+  min-inline-size: 500px;
+  min-block-size: 230px;
+}
+
+.dialog[open] {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  gap: 35px;
+}
+
+.dialog__title {
+  font-family: "ProtestGuerrilla-Regular";
+}
+
+.dialog__form {
+  inline-size: 100%;
+}
+
+.dialog__button {
+  inline-size: 100%;
+  appearance: none;
+  padding: 10px;
+  border: 2px solid #000;
+  background-color: transparent;
+  translate: 0;
+  transition: translate 0.1s linear;
+  transition: box-shadow 0.2s linear;
+}
+
+.dialog__button:hover {
+  background-color: rgba(176, 176, 176, 0.5);
+  box-shadow: 3px 3px 2px rgba(0 0 0 / 0.4);
+}
+
+.dialog__button:active {
+  translate: 2px 2px;
+}
