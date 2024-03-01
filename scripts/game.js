@@ -2,6 +2,7 @@
 import { Snake } from "./snake.js";
 import { Food } from "./food.js";
 
+let stop = false;
 let lastTimeRendered = 0;
 const board = document.querySelector(".game-board");
 const defaultSnakePosition = [
@@ -18,25 +19,38 @@ let previousDirection = {x: 1, y: 0};
 
 const dialog = document.querySelector('.dialog');
 const dialogForm = document.querySelector('.dialog__form');
+const scoreSpan = document.querySelector('.score__span');
+let score = 0;
+
+function updateScore(reset=false) {
+  const resultScore = (reset) ? 0 : ++score;
+  scoreSpan.textContent = resultScore;
+}
+
+
 dialogForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
   snake.reset();
   snake.changeDirection({x: 1, y: 0});
   draw();
+  updateScore(true);
   dialog.close();
-  // startGame();
+  stop = false;
+  startGame();
 });
 
 function startGame(currentTime) {
-  window.requestAnimationFrame(startGame);
+  if (!stop) {
+    window.requestAnimationFrame(startGame);
+  }
   const secondsSinceLastTimeRendered = (currentTime - lastTimeRendered) / 1000;
   if (secondsSinceLastTimeRendered < 1 / snake.snakeSpeed) return;
   lastTimeRendered = currentTime;
-
+  console.log(checkDefeat());
   update();
   if (checkDefeat()) {
     dialog.showModal();
-    return;
+    stop = true;
   }
   draw();
 }
@@ -60,6 +74,7 @@ function update() {
   // проверить находится ли голова змеи и еда на одной позиции
   if (snake.checkIfOnSnake(food)) {
     snake.expand();
+    updateScore();
     food = null;
   }
 
@@ -84,25 +99,25 @@ document.addEventListener("keydown", function (evt) {
   switch (key) {
     case "w":
     case "arrowup":
-      // console.log('up');
+      console.log('up');
       direction.x = 0;
       direction.y = -1;
       break;
     case "s":
     case "arrowdown":
-      // console.log('down');
+      console.log('down');
       direction.x = 0;
       direction.y = 1;
       break;
     case "a":
     case "arrowleft":
-      // console.log('left');
+      console.log('left');
       direction.x = -1;
       direction.y = 0;
       break;
     case "d":
     case "arrowright":
-      // console.log('right');
+      console.log('right');
       direction.x = 1;
       direction.y = 0;
       break;
