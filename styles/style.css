@@ -5,6 +5,7 @@ body {
   font-family: "ProtestGuerrilla-Regular";
   font-size: 27px;
   block-size: 100vh;
+
 }
 
 .container {
@@ -41,7 +42,6 @@ body {
 
 .dialog {
   padding: 35px;
-
   min-inline-size: 500px;
   min-block-size: 230px;
 }
