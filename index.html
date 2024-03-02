@@ -11,23 +11,22 @@
   <body>
     <div class="container">
       <h1>Snake Game</h1>
-      <div class="game-board"></div>
+      <div class="board">
+        <div class="board__game board_hidden"></div>
+        <div class="board-start board-modal">
+          <h2 class="board-start__title">Choose difficulty</h2>
+          <div class="board-start__button-container">
+            <button type="submit" class="board-start__button board-start__button_easy">Easy</button>
+            <button type="submit" class="board-start__button board-start__button_medium">Medium</button>
+            <button type="submit" class="board-start__button board-start__button_hard">Hard</button>
+          </div>
+        </div>
+        <div class="board-defeat board-modal board_hidden">
+          <h2 class="board-start__title">You've lost.</h2>
+        </div>
+      </div>
       <p class="score">Score: <span class="score__span">0</span></p>
     </div>
-    <dialog class="dialog">
-      <h2 class="dialog__title">You've lost.</h2>
-      <form class="dialog__form">
-        <button type="submit" class="dialog__button">Restart?</button>
-      </form>
-    </dialog>
-    <dialog class="dialog">
-      <h2 class="dialog__title">Choose difficulty</h2>
-      <form class="dialog__form">
-        <button type="submit">Easy</button>
-        <button type="submit">Medium</button>
-        <button type="submit">Hard</button>
-      </form>
-    </dialog>
     <template id="snake-template">
       <div class="snake"></div>
     </template>

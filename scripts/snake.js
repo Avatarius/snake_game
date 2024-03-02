@@ -39,7 +39,6 @@ class Snake {
       }
     });
     this.changeDirection();
-    console.log(this.snakePositionArray);
   }
 
   draw(board) {
@@ -85,9 +84,9 @@ class Snake {
   reset() {
     this.isStart = true;
     this.snakePositionArray = _createDeepCopy(this.defaultPositionArray);
-    console.log(this.snakePositionArray);
     this.direction.x = 1;
     this.direction.y = 0;
+    this.newDirectionBuffer = [];
   }
 }
 

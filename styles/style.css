@@ -2,10 +2,11 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: "ProtestGuerrilla-Regular";
+  /* font-family: "ProtestGuerrilla-Regular"; */
+  color: #fff;
   font-size: 27px;
+  background-color: #171717;
   block-size: 100vh;
-
 }
 
 .container {
@@ -14,16 +15,67 @@ body {
   justify-content: center;
   align-items: center;
   gap: 20px;
+  inline-size: 800px;
   inline-size: 40%;
 }
 
-.game-board {
+.container_hidden {
+  visibility: hidden;
+}
+
+.board {
+  inline-size: 100%;
+  aspect-ratio: 1 / 1;
+  border: 2px solid #000;
+}
+
+.board__game {
   display: grid;
   grid-template-columns: repeat(21, 1fr);
   grid-template-rows: repeat(21, 1fr);
-  border: 2px solid #000;
   inline-size: 100%;
-  aspect-ratio: 1 / 1;
+  block-size: 100%;
+}
+
+.board .board_hidden {
+  display: none;
+}
+
+.board-modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.board-start {
+  gap: 70px;
+}
+
+.board-start__title {
+  font-weight: 400;
+  font-size: 85px;
+}
+
+.board-start__button-container {
+  display: flex;
+  gap: 20px;
+}
+
+.board-start__button {
+  appearance: none;
+  background-color: transparent;
+  border: none;
+  border-radius: 23px;
+  padding: 2px 20px;
+  min-inline-size: 110px;
+  font-size: 65px;
+}
+
+.board-start__button:hover {
+  background-color: #606363;
 }
 
 .score {
@@ -32,52 +84,12 @@ body {
 
 .snake {
   border: 1px solid #000;
-  background-color: #451f69;
+  /* background-color: #451f69; */
+  background-color: green;
 }
 
 .food {
   border: 1px solid #000;
-  background-color: #11b5b8;
-}
-
-.dialog {
-  padding: 35px;
-  min-inline-size: 500px;
-  min-block-size: 230px;
-}
-
-.dialog[open] {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  gap: 35px;
-}
-
-.dialog__title {
-  font-family: "ProtestGuerrilla-Regular";
-}
-
-.dialog__form {
-  inline-size: 100%;
-}
-
-.dialog__button {
-  inline-size: 100%;
-  appearance: none;
-  padding: 10px;
-  border: 2px solid #000;
-  background-color: transparent;
-  translate: 0;
-  transition: translate 0.1s linear;
-  transition: box-shadow 0.2s linear;
-}
-
-.dialog__button:hover {
-  background-color: rgba(176, 176, 176, 0.5);
-  box-shadow: 3px 3px 2px rgba(0 0 0 / 0.4);
-}
-
-.dialog__button:active {
-  translate: 2px 2px;
+  /* background-color: #11b5b8; */
+  background-color: red;
 }

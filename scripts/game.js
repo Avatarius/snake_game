@@ -3,9 +3,13 @@ import { Snake } from "./snake.js";
 import { Food } from "./food.js";
 
 class Game {
-  board = document.querySelector(".game-board");
-  dialog = document.querySelector(".dialog");
-  dialogForm = document.querySelector(".dialog__form");
+  container = document.querySelector('.container');
+  board = document.querySelector(".board__game");
+  startModal = document.querySelector('.board-start');
+  defeatModal = document.querySelector('.board-defeat');
+  buttonEasy = document.querySelector('.board-start__button_easy');
+  buttonMedium = document.querySelector('.board-start__button_medium');
+  buttonHard = document.querySelector('.board-start__button_hard');
   scoreSpan = document.querySelector(".score__span");
   stop = false;
   lastTimeRendered = 0;
@@ -31,12 +35,17 @@ class Game {
     this.lastTimeRendered = currentTime;
     this.update();
     if (this.checkDefeat()) {
-      // debugger;
-      this.dialog.showModal();
+      this.board.classList.add('board_hidden');
+      this.defeatModal.classList.remove('board_hidden');
+      this.snake.reset();
       this.stop = true;
       return;
     }
     this.draw();
+  }
+
+  setSpeed(speed) {
+    this.speed = speed;
   }
 
   checkDefeat() {
@@ -60,18 +69,14 @@ class Game {
     while (!this.food) {
       const foodPosX = this.randomIntFromInterval(1, 21);
       const foodPosY = this.randomIntFromInterval(1, 21);
-      console.log(foodPosX);
-      console.log(foodPosY);
       const ifFoodInsideSnake = this.snake.snakePositionArray.some(
         (item) => item.x === foodPosX && item.y === foodPosY
       );
-      console.log(ifFoodInsideSnake);
       if (ifFoodInsideSnake) {
         continue;
       } else {
         this.food = new Food(foodPosX, foodPosY);
       }
-      console.log(this.food);
     }
     // проверка съела ли змея еду
     if (
@@ -104,6 +109,29 @@ class Game {
   }
 
   setEventListeners() {
+    [this.buttonEasy, this.buttonMedium, this.buttonHard].forEach((button) => {
+      button.addEventListener('click', (evt) => {
+        let speed;
+        if (evt.target === this.buttonMedium) {
+          speed = 10;
+        } else if (evt.target === this.buttonHard) {
+          speed = 15;
+        } else {
+          speed = 5
+        }
+        this.setSpeed(speed);
+        this.startModal.classList.add('board_hidden')
+        this.board.classList.remove('board_hidden');
+        this.snake.reset();
+        this.stop = false;
+        this.start(0);
+      })
+    })
+    this.defeatModal.addEventListener('click', (evt) => {
+      this.defeatModal.classList.add('board_hidden');
+      this.startModal.classList.remove('board_hidden');
+      this.start(0);
+    })
     document.addEventListener("keydown", (evt) => {
       const key = evt.key.toLowerCase();
       switch (key) {
@@ -131,17 +159,10 @@ class Game {
           return;
       }
     });
-    this.dialogForm.addEventListener("submit", (evt) => {
-      evt.preventDefault();
-      this.stop = false;
-      this.snake.reset();
-      this.updateScore(true);
-      this.dialog.close();
-      this.start(0);
-    });
+
   }
 }
 
 const game = new Game();
 
-window.requestAnimationFrame((currentTime) => game.start(currentTime));
+// window.requestAnimationFrame((currentTime) => game.start(currentTime));
