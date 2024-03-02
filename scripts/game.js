@@ -31,8 +31,10 @@ class Game {
     this.lastTimeRendered = currentTime;
     this.update();
     if (this.checkDefeat()) {
+      // debugger;
       this.dialog.showModal();
       this.stop = true;
+      return;
     }
     this.draw();
   }

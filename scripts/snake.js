@@ -39,6 +39,7 @@ class Snake {
       }
     });
     this.changeDirection();
+    console.log(this.snakePositionArray);
   }
 
   draw(board) {
