@@ -1,22 +1,19 @@
 function _createDeepCopy(array) {
   const newArray = [];
   array.forEach((item, index) => {
-    newArray[index] = {x: item.x, y: item.y};
+    newArray[index] = { x: item.x, y: item.y };
   });
   return newArray;
 }
 
-
 class Snake {
   isStart = true;
-  speed = 7;
-  direction = {x: 1, y: 0};
+  direction = { x: 1, y: 0 };
   newDirectionBuffer = [];
-  previousDirection = {x: 1, y: 0};
+  previousDirection = { x: 1, y: 0 };
   constructor(defaultPositionArray) {
     this.defaultPositionArray = _createDeepCopy(defaultPositionArray);
     this.snakePositionArray = _createDeepCopy(defaultPositionArray);
-
   }
 
   update() {
@@ -46,11 +43,11 @@ class Snake {
 
   draw(board) {
     const snakeTemplate = document.querySelector("#snake-template").content;
-    this.snakePositionArray.forEach(item => {
+    this.snakePositionArray.forEach((item) => {
       const snakeElement = snakeTemplate
         .querySelector(".snake")
         .cloneNode(true);
-        snakeElement.style.gridColumnStart = item.x;
+      snakeElement.style.gridColumnStart = item.x;
       snakeElement.style.gridRowStart = item.y;
       board.append(snakeElement);
     });
@@ -61,12 +58,17 @@ class Snake {
   }
 
   changeDirection() {
-    const newDirection = (this.newDirectionBuffer.length) ? this.newDirectionBuffer.shift() : this.direction;
+    const newDirection = this.newDirectionBuffer.length
+      ? this.newDirectionBuffer.shift()
+      : this.direction;
 
-    const isOppositeX = (newDirection.x !== 0) && (newDirection.x === this.direction.x * -1);
-    const isOppositeY = (newDirection.y !== 0) && (newDirection.y === this.direction.y * -1);
-    const isSameX = (newDirection.x !== 0) && (newDirection.x === this.direction.x);
-    const isSameY = (newDirection.y !== 0) && (newDirection.y === this.direction.isOppositeY);
+    const isOppositeX =
+      newDirection.x !== 0 && newDirection.x === this.direction.x * -1;
+    const isOppositeY =
+      newDirection.y !== 0 && newDirection.y === this.direction.y * -1;
+    const isSameX = newDirection.x !== 0 && newDirection.x === this.direction.x;
+    const isSameY =
+      newDirection.y !== 0 && newDirection.y === this.direction.isOppositeY;
     const isOpposite = isOppositeX || isOppositeY;
     const isSame = isSameX || isSameY;
     if (!(isOpposite || isSame)) {
@@ -76,7 +78,7 @@ class Snake {
   }
 
   expand() {
-    this.snakePositionArray.push({x: this.tailPosX, y: this.tailPosY});
+    this.snakePositionArray.push({ x: this.tailPosX, y: this.tailPosY });
   }
 
   reset() {
@@ -86,8 +88,6 @@ class Snake {
     this.direction.x = 1;
     this.direction.y = 0;
   }
-
-
 }
 
 export { Snake };

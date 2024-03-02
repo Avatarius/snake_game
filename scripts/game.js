@@ -9,6 +9,7 @@ class Game {
   scoreSpan = document.querySelector(".score__span");
   stop = false;
   lastTimeRendered = 0;
+  speed = 6;
   score = 0;
   food;
   defaultSnakePosition = [
@@ -21,13 +22,12 @@ class Game {
     this.setEventListeners();
   }
   start(currentTime) {
-    console.log(this.snake);
     if (!this.stop) {
       window.requestAnimationFrame((time) => this.start(time));
     }
     const secondsSinceLastTimeRendered =
       (currentTime - this.lastTimeRendered) / 1000;
-    if (secondsSinceLastTimeRendered < 1 / this.snake.speed) return;
+    if (secondsSinceLastTimeRendered < 1 / this.speed) return;
     this.lastTimeRendered = currentTime;
     this.update();
     if (this.checkDefeat()) {
@@ -54,8 +54,22 @@ class Game {
 
   update() {
     this.snake.update();
-    if (!this.food) {
-      this.food = new Food();
+    // Генерим еду
+    while (!this.food) {
+      const foodPosX = this.randomIntFromInterval(1, 21);
+      const foodPosY = this.randomIntFromInterval(1, 21);
+      console.log(foodPosX);
+      console.log(foodPosY);
+      const ifFoodInsideSnake = this.snake.snakePositionArray.some(
+        (item) => item.x === foodPosX && item.y === foodPosY
+      );
+      console.log(ifFoodInsideSnake);
+      if (ifFoodInsideSnake) {
+        continue;
+      } else {
+        this.food = new Food(foodPosX, foodPosY);
+      }
+      console.log(this.food);
     }
     // проверка съела ли змея еду
     if (
@@ -79,8 +93,12 @@ class Game {
   }
 
   updateScore(reset = false) {
-    if (reset) this.score = 0;
+    this.score = reset ? 0 : ++this.score;
     this.scoreSpan.textContent = this.score;
+  }
+
+  randomIntFromInterval(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
   setEventListeners() {
