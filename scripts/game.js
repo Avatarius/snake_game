@@ -197,8 +197,8 @@ buttonPause.addEventListener("click", () => {
   board.classList.toggle("game_filtered");
   menuPause.classList.toggle("hidden");
   const buttonImg = game.stop
-    ? "url(../images/play.svg"
-    : "url(../images/pause.svg";
+    ? "url(../../images/play.svg"
+    : "url(../../images/pause.svg";
   buttonPause.style.backgroundImage = buttonImg;
   if (!game.stop) {
     game.snake.newDirectionBuffer = [];
