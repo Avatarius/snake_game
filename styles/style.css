@@ -2,7 +2,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* font-family: "ProtestGuerrilla-Regular"; */
+  font-family: "KodeMono-Regular", sans-serif;
   color: #fff;
   background-color: #171717;
   block-size: 100dvh;
@@ -70,7 +70,8 @@ body {
   font-size: clamp(1.25rem, 0.901rem + 1.489vw, 1.688rem);
 }
 
-.menu_start {
+.menu_start,
+.menu_defeat {
   gap: 70px;
 }
 
@@ -78,7 +79,7 @@ body {
   background-image: url("../images/pause.svg");
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 70%;
+  background-size: 50%;
 }
 
 .menu__button-container {
@@ -95,7 +96,7 @@ body {
   background-color: transparent;
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 60%;
+  background-size: 40%;
   cursor: pointer;
   appearance: none;
 }
@@ -114,6 +115,7 @@ body {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-areas: "details__button-container score .";
+  align-items: center;
   inline-size: 100%;
 }
 
@@ -122,12 +124,13 @@ body {
   grid-template-columns: min-content max-content;
   grid-area: details__button-container;
   justify-content: flex-start;
-  gap: clamp(0.625rem, -0.372rem + 4.255vw, 1.875rem);
+  gap: clamp(0.313rem, 0.063rem + 1.064vw, 0.625rem);
 }
 
 .details__button {
   border-radius: 100%;
   inline-size: clamp(2.188rem, 1.439rem + 3.191vw, 3.125rem);
+  aspect-ratio: 1 / 1;
 }
 
 .details__button_pause {
@@ -136,6 +139,7 @@ body {
 
 .details__button_reset {
   background-image: url("../images/reset.svg");
+  background-size: 50%;
 }
 
 .score {
