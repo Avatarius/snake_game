@@ -4,18 +4,18 @@ import { Food } from "./food.js";
 
 class Game {
   container = document.querySelector('.container');
-  board = document.querySelector(".board__game");
-  boardPause = document.querySelector('.board-pause');
+  board = document.querySelector(".game");
+  boardPause = document.querySelector('.menu_pause');
   details = document.querySelector('.details');
-  startModal = document.querySelector('.board-start');
-  defeatModal = document.querySelector('.board-defeat');
-  buttonEasy = document.querySelector('.button_start_easy');
-  buttonMedium = document.querySelector('.button_start_medium');
-  buttonHard = document.querySelector('.button_start_hard');
-  buttonPause = document.querySelector('.button_details_pause');
-  buttonReset = document.querySelector('.button_details_reset');
+  startModal = document.querySelector('.menu_start');
+  defeatModal = document.querySelector('.menu_defeat');
+  buttonEasy = document.querySelector('.menu__button_easy');
+  buttonMedium = document.querySelector('.menu__button_medium');
+  buttonHard = document.querySelector('.menu__button_hard');
+  buttonPause = document.querySelector('.details__button_pause');
+  buttonReset = document.querySelector('.details__button_reset');
   scoreSpan = document.querySelector(".score__span");
-  boardScoreSpan = document.querySelector('.board__score');
+  boardScoreSpan = document.querySelector('.menu__score');
   stop = false;
   lastTimeRendered = 0;
   speed = 6;
@@ -43,22 +43,22 @@ class Game {
     if (this.checkDefeat()) {
       this.stop = true;
       this.boardScoreSpan.textContent = this.score;
-      this.board.classList.add('board_hidden');
-      this.details.classList.add('details_hidden');
-      this.defeatModal.classList.remove('board_hidden');
+      this.board.classList.add('hidden');
+      this.details.classList.add('hidden');
+      this.defeatModal.classList.remove('hidden');
       return;
     }
     this.draw();
   }
 
   populateGrid() {
-    const gridItemTemplate = document.querySelector('#board__game__item-template').content;
+    const gridItemTemplate = document.querySelector('#game__item-template').content;
     for (let i = 1; i <= 21; i++) {
       for (let j = 1; j <= 21; j++) {
-        const gridItem = gridItemTemplate.querySelector('.board__game__item').cloneNode(true);
+        const gridItem = gridItemTemplate.querySelector('.game__item').cloneNode(true);
         gridItem.style.gridColumnStart = i;
         gridItem.style.gridRowStart = j;
-        gridItem.classList.add(`board__game__item_${i}_${j}`);
+        gridItem.classList.add(`game__item_${i}_${j}`);
         this.board.append(gridItem);
       }
     }
@@ -149,9 +149,9 @@ class Game {
         this.food = null;
         this.stop = false;
         this.start(0);
-        this.startModal.classList.add('board_hidden')
-        this.details.classList.remove('details_hidden');
-        this.board.classList.remove('board_hidden');
+        this.startModal.classList.add('hidden')
+        this.details.classList.remove('hidden');
+        this.board.classList.remove('hidden');
         this.updateScore(true);
       })
     });
@@ -159,9 +159,8 @@ class Game {
       if (!this.stop) {
         this.stop = true;
         this.buttonPause.style.backgroundImage = 'url(../images/play.svg';
-        // this.board.classList.add('board_game_paused');
-        this.boardPause.classList.add('board-pause_visibile');
-        this.board.classList.add('board__game_blured');
+        this.boardPause.classList.remove('hidden');
+        this.board.classList.add('game_filtered');
 
       } else {
         this.stop = false;
@@ -169,23 +168,23 @@ class Game {
         this.snake.newDirectionBuffer = [];
         this.start(0);
         this.buttonPause.style.backgroundImage = 'url(../images/pause.svg';
-        this.boardPause.classList.remove('board-pause_visibile');
-        this.board.classList.remove('board__game_blured');
+        this.boardPause.classList.add('hidden');
+        this.board.classList.remove('game_filtered');
       }
     });
     this.buttonReset.addEventListener('click', () => {
       this.stop = true;
-      this.startModal.classList.remove('board_hidden');
-      this.board.classList.add('board_hidden');
-      this.details.classList.add('details_hidden');
+      this.startModal.classList.remove('hidden');
+      this.board.classList.add('hidden');
+      this.details.classList.add('hidden');
       this.board.classList.remove('board_game_paused');
-      this.boardPause.classList.remove('board-pause_visibile');
-      this.board.classList.remove('board__game_blured');
+      this.boardPause.classList.remove('menu_pause_visibile');
+      this.board.classList.remove('game_filtered');
       this.buttonPause.style.backgroundImage = 'url(../images/pause.svg';
     });
     this.defeatModal.addEventListener('click', (evt) => {
-      this.defeatModal.classList.add('board_hidden');
-      this.startModal.classList.remove('board_hidden');
+      this.defeatModal.classList.add('hidden');
+      this.startModal.classList.remove('hidden');
       this.start(0);
     })
     document.addEventListener("keydown", (evt) => {

@@ -5,7 +5,7 @@ class Food {
   }
 
   draw(board) {
-    const gridItem = document.querySelector(`.board__game__item_${this.x}_${this.y}`);
+    const gridItem = document.querySelector(`.game__item_${this.x}_${this.y}`);
     gridItem.classList.add('food');
   }
 }

@@ -4,9 +4,21 @@ body {
   align-items: center;
   /* font-family: "ProtestGuerrilla-Regular"; */
   color: #fff;
-  font-size: 27px;
   background-color: #171717;
-  block-size: 100vh;
+  block-size: 100dvh;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(0.313rem, -0.436rem + 3.191vw, 1.25rem);
+  inline-size: min(690px, 95%);
 }
 
 .title {
@@ -15,155 +27,126 @@ body {
   text-align: center;
 }
 
-.container {
+.board {
+  position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-  max-inline-size: 800px;
-  inline-size: min(690px, 95%);
-}
-
-.container_hidden {
-  visibility: hidden;
-}
-
-.board {
   inline-size: 100%;
   aspect-ratio: 1 / 1;
-  position: relative;
 }
 
-.board__game {
+.board__item {
+  position: absolute;
+  inset: 0;
+}
+
+.game {
   display: grid;
   grid-template-columns: repeat(21, 1fr);
   grid-template-rows: repeat(21, 1fr);
-  inline-size: 100%;
-  block-size: 100%;
-  position: relative;
   gap: clamp(0.125rem, 0.025rem + 0.426vw, 0.25rem);
-  padding: 1px;
+  border: 1px solid rgba(255 255 255 / 0.5);
+  border-radius: clamp(0.625rem, 0.376rem + 1.064vw, 0.938rem);
+  padding: 6px;
 }
 
-.board__game_blured {
-  filter: blur(5px);
+.game_filtered {
+  filter: blur(3px) grayscale(100%);
 }
 
-.board__game__item {
+.game__item {
   border-radius: clamp(0.25rem, 0.051rem + 0.851vw, 0.5rem);
   background-color: #282828;
 }
 
-.board .board_hidden {
-  display: none;
-}
-
-.board-modal {
+.menu {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  inline-size: 100%;
-  block-size: 100%;
 }
 
-.board-start {
-  gap: 70px;
-}
-
-.board__text {
+.menu__text {
   font-size: clamp(1.25rem, 0.901rem + 1.489vw, 1.688rem);
 }
 
-.board-defeat {
-
+.menu_start {
+  gap: 70px;
 }
 
-.board-pause {
-  visibility: hidden;
-  position: absolute;
-  inset: 0;
-  background-image: url('../images/pause.svg');
+.menu_pause {
+  background-image: url("../images/pause.svg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: 70%;
 }
 
-.board-pause_visibile {
-  visibility: visible;
-}
-.board-start__button-container {
+.menu__button-container {
   display: grid;
   grid-template-columns: repeat(3, min-content);
   justify-content: center;
   gap: clamp(1.25rem, 0.751rem + 2.128vw, 1.875rem);
   padding-inline: 10px;
-  inline-size: 100%;
 }
 
 .button {
-  appearance: none;
-  background-color: transparent;
   border: none;
   border-radius: 18px;
-  background-size: 60%;
-  background-position: center;
+  background-color: transparent;
   background-repeat: no-repeat;
+  background-position: center;
+  background-size: 60%;
   cursor: pointer;
+  appearance: none;
 }
 
 .button:hover {
   background-color: #606363;
 }
 
-.button_start {
+.menu__button {
   padding: 2px 20px;
   font-size: 50px;
   font-size: clamp(1.563rem, 0.852rem + 3.03vw, 3.125rem);
 }
 
-.button_details {
-  inline-size: clamp(2.188rem, 1.439rem + 3.191vw, 3.125rem);
-  border-radius: 100%;
-}
-
-.button_details_pause {
-  background-image: url('../images/pause.svg');
-}
-
-.button_details_reset {
-  background-image: url('../images/reset.svg');
-}
-
 .details {
-  inline-size: 100%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-areas: 'details__button-container score .';
-}
-
-.details_hidden {
-  visibility: hidden;
+  grid-template-areas: "details__button-container score .";
+  inline-size: 100%;
 }
 
 .details__button-container {
   display: grid;
   grid-template-columns: min-content max-content;
+  grid-area: details__button-container;
   justify-content: flex-start;
   gap: clamp(0.625rem, -0.372rem + 4.255vw, 1.875rem);
-  grid-area: details__button-container;
 }
 
+.details__button {
+  border-radius: 100%;
+  inline-size: clamp(2.188rem, 1.439rem + 3.191vw, 3.125rem);
+}
+
+.details__button_pause {
+  background-image: url("../images/pause.svg");
+}
+
+.details__button_reset {
+  background-image: url("../images/reset.svg");
+}
 
 .score {
-  font-size: clamp(1.438rem, 1.088rem + 1.489vw, 1.875rem);
   grid-area: score;
   justify-self: center;
+  font-size: clamp(1.438rem, 1.088rem + 1.489vw, 1.875rem);
 }
 
 .snake {
   border: 1px solid #000;
+  text-align: center;
   background-color: green;
 }
 
@@ -172,6 +155,5 @@ body {
 }
 
 .food {
-  /* border: 1px solid #000; */
   background-color: red;
 }

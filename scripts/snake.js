@@ -43,7 +43,7 @@ class Snake {
 
   draw(board) {
     this.snakePositionArray.forEach((item, index) => {
-      const gridItem = document.querySelector(`.board__game__item_${item.x}_${item.y}`);
+      const gridItem = document.querySelector(`.game__item_${item.x}_${item.y}`);
       gridItem.classList.add('snake');
       if (index === 0) {
         gridItem.classList.add('snake__head');

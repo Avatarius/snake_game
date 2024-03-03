@@ -1,43 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./fonts/fonts.css" />
-    <link rel="stylesheet" href="./styles/globals.css" />
-    <link rel="stylesheet" href="./styles/style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./fonts/fonts.css">
+    <link rel="stylesheet" href="./styles/globals.css">
+    <link rel="stylesheet" href="./styles/style.css">
     <title>Snake Game</title>
   </head>
   <body>
     <div class="container">
       <h1 class="title">Snake Game</h1>
-      <div class="board">
-        <div class="board__game board_hidden"></div>
-        <div class="board-start board-modal">
+      <ul class="board">
+        <li class="board__item game hidden"></li>
+        <li class="board__item menu menu_start">
           <h2 class="title">Choose difficulty</h2>
-          <div class="board-start__button-container">
-            <button type="submit" class="button button_start button_start_easy">Easy</button>
-            <button type="submit" class="button button_start button_start_medium">Medium</button>
-            <button type="submit" class="button button_start button_start_hard">Hard</button>
+          <div class="menu__button-container">
+            <button type="submit" class="button menu__button menu__button_easy">
+              Easy
+            </button>
+            <button
+              type="submit"
+              class="button menu__button menu__button_medium"
+            >
+              Medium
+            </button>
+            <button type="submit" class="button menu__button menu__button_hard">
+              Hard
+            </button>
           </div>
-        </div>
-        <div class="board-defeat board-modal board_hidden">
+        </li>
+        <li class="board__item menu_defeat menu hidden">
           <h2 class="title">You've lost.</h2>
-          <p class="board__text">Your score: <span class="board__score"></span></p>
-          <p class="board__text">Click here to restart</p>
-        </div>
-        <div class="board-pause"></div>
-      </div>
-      <div class="details details_hidden">
+          <p class="menu__text">
+            Your score: <span class="menu__score"></span>
+          </p>
+          <p class="menu__text">Click here to restart</p>
+        </li>
+        <li class="board__item menu_pause hidden"></li>
+      </ul>
+      <div class="details hidden">
         <div class="details__button-container">
-          <button class="button button_details button_details_pause" title="pause/play"></button>
-          <button class="button button_details button_details_reset" title="reset"></button>
+          <button
+            class="button details__button details__button_pause"
+            title="pause/play"
+          ></button>
+          <button
+            class="button details__button details__button_reset"
+            title="reset"
+          ></button>
         </div>
         <p class="score">Score: <span class="score__span">0</span></p>
       </div>
     </div>
-    <template id="board__game__item-template">
-      <div class="board__game__item"></div>
+    <template id="game__item-template">
+      <div class="game__item"></div>
     </template>
     <script src="./scripts/game.js" type="module"></script>
   </body>
