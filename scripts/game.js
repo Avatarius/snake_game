@@ -25,6 +25,7 @@ class Game {
   ];
   constructor() {
     this.snake = new Snake(this.defaultSnakePosition);
+    this.populateGrid();
     this.setEventListeners();
   }
   start(currentTime) {
@@ -37,13 +38,25 @@ class Game {
     this.lastTimeRendered = currentTime;
     this.update();
     if (this.checkDefeat()) {
+      this.stop = true;
       this.board.classList.add('board_hidden');
       this.defeatModal.classList.remove('board_hidden');
-      /* this.snake.reset();
-      this.stop = true; */
       return;
     }
     this.draw();
+  }
+
+  populateGrid() {
+    const gridItemTemplate = document.querySelector('#board__game__item-template').content;
+    for (let i = 1; i <= 21; i++) {
+      for (let j = 1; j <= 21; j++) {
+        const gridItem = gridItemTemplate.querySelector('.board__game__item').cloneNode(true);
+        gridItem.style.gridColumnStart = i;
+        gridItem.style.gridRowStart = j;
+        gridItem.classList.add(`board__game__item_${i}_${j}`);
+        this.board.append(gridItem);
+      }
+    }
   }
 
 
@@ -95,11 +108,11 @@ class Game {
 
   draw() {
     const snakeElements = this.board.querySelectorAll(".snake");
-    snakeElements.forEach((item) => item.remove());
+    snakeElements.forEach((item) => item.classList.remove('snake'));
     this.snake.draw(this.board);
 
     const foodElement = this.board.querySelector(".food");
-    if (foodElement) foodElement.remove();
+    if (foodElement) foodElement.classList.remove('food');
     if (this.food) this.food.draw(this.board);
   }
 

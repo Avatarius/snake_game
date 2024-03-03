@@ -44,12 +44,15 @@ class Snake {
   draw(board) {
     const snakeTemplate = document.querySelector("#snake-template").content;
     this.snakePositionArray.forEach((item) => {
-      const snakeElement = snakeTemplate
+      const gridItem = document.querySelector(`.board__game__item_${item.x}_${item.y}`);
+      gridItem.classList.add('snake');
+      /* const snakeElement = snakeTemplate
         .querySelector(".snake")
         .cloneNode(true);
       snakeElement.style.gridColumnStart = item.x;
       snakeElement.style.gridRowStart = item.y;
-      board.append(snakeElement);
+      board.append(snakeElement); */
+
     });
   }
 

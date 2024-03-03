@@ -26,7 +26,7 @@ body {
 .board {
   inline-size: 100%;
   aspect-ratio: 1 / 1;
-  border: 2px solid #000;
+  /* border: 2px solid #000; */
 }
 
 .board__game {
@@ -36,6 +36,13 @@ body {
   inline-size: 100%;
   block-size: 100%;
   position: relative;
+  gap: 4px;
+  padding: 1px;
+}
+
+.board__game__item {
+  border-radius: 8px;
+  background-color: #282828;
 }
 
 .board_game_paused {
@@ -88,6 +95,7 @@ body {
   background-size: 60%;
   background-position: center;
   background-repeat: no-repeat;
+  pointer-events: all;
 }
 
 .button:hover {
@@ -112,7 +120,6 @@ body {
   min-block-size: 50px;
   border-radius: 100%;
   background-image: url('../images/reset.svg');
-  /* background-size: 60%; */
 }
 
 .details {
@@ -133,6 +140,7 @@ body {
 .score {
   font-size: 42px;
   grid-area: score;
+  justify-self: center;
 }
 
 .snake {
