@@ -7,9 +7,11 @@ class Game {
   board = document.querySelector(".board__game");
   startModal = document.querySelector('.board-start');
   defeatModal = document.querySelector('.board-defeat');
-  buttonEasy = document.querySelector('.board-start__button_easy');
-  buttonMedium = document.querySelector('.board-start__button_medium');
-  buttonHard = document.querySelector('.board-start__button_hard');
+  buttonEasy = document.querySelector('.button_start_easy');
+  buttonMedium = document.querySelector('.button_start_medium');
+  buttonHard = document.querySelector('.button_start_hard');
+  buttonPause = document.querySelector('.button_pause');
+  buttonReset = document.querySelector('.button_reset');
   scoreSpan = document.querySelector(".score__span");
   stop = false;
   lastTimeRendered = 0;
@@ -37,12 +39,14 @@ class Game {
     if (this.checkDefeat()) {
       this.board.classList.add('board_hidden');
       this.defeatModal.classList.remove('board_hidden');
-      this.snake.reset();
-      this.stop = true;
+      /* this.snake.reset();
+      this.stop = true; */
       return;
     }
     this.draw();
   }
+
+
 
   setSpeed(speed) {
     this.speed = speed;
@@ -120,13 +124,34 @@ class Game {
           speed = 5
         }
         this.setSpeed(speed);
-        this.startModal.classList.add('board_hidden')
-        this.board.classList.remove('board_hidden');
         this.snake.reset();
         this.stop = false;
         this.start(0);
+        this.startModal.classList.add('board_hidden')
+        this.board.classList.remove('board_hidden');
+        this.updateScore(true);
       })
-    })
+    });
+    this.buttonPause.addEventListener('click', () => {
+      if (!this.stop) {
+        this.stop = true;
+        this.buttonPause.style.backgroundImage = 'url(../images/play.svg';
+        this.board.classList.add('board_game_paused');
+      } else {
+        this.stop = false;
+        this.board.classList.remove('board_game_paused');
+        this.snake.newDirectionBuffer = [];
+        this.start(0);
+        this.buttonPause.style.backgroundImage = 'url(../images/pause.svg';
+      }
+    });
+    this.buttonReset.addEventListener('click', () => {
+      this.stop = true;
+      this.startModal.classList.remove('board_hidden');
+      this.board.classList.add('board_hidden');
+      this.board.classList.remove('board_game_paused');
+      this.buttonPause.style.backgroundImage = 'url(../images/pause.svg';
+    });
     this.defeatModal.addEventListener('click', (evt) => {
       this.defeatModal.classList.add('board_hidden');
       this.startModal.classList.remove('board_hidden');
