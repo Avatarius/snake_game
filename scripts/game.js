@@ -70,7 +70,7 @@ class Game {
     details.classList.add("hidden");
     menuStart.classList.remove("hidden");
     board.classList.remove("game_filtered");
-    buttonPause.style.backgroundImage = "url(../images/pause.svg";
+    buttonPause.classList.remove('details__button_play');
   }
 
   setSpeed(speed) {
