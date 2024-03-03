@@ -26,6 +26,7 @@ body {
 .board {
   inline-size: 100%;
   aspect-ratio: 1 / 1;
+  position: relative;
 }
 
 .board__game {
@@ -39,24 +40,13 @@ body {
   padding: 1px;
 }
 
-.board__game__item {
-  border-radius: 8px;
-  background-color: #282828;
-}
-
-.board_game_paused {
+.board__game_blured {
   filter: blur(5px);
 }
 
-.board_game_paused::before {
-  content: '';
-  background-image: url('../images/pause.svg');
-  background-size: 50%;
-  background-position: center;
-  background-repeat: no-repeat;
-  position: absolute;
-  inset: 0;
-  filter: unset;
+.board__game__item {
+  border-radius: 8px;
+  background-color: #282828;
 }
 
 .board .board_hidden {
@@ -86,6 +76,23 @@ body {
   /* font-size: ; */
 }
 
+.board-defeat {
+
+}
+
+.board-pause {
+  visibility: hidden;
+  position: absolute;
+  inset: 0;
+  background-image: url('../images/pause.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 70%;
+}
+
+.board-pause_visibile {
+  visibility: visible;
+}
 .board-start__button-container {
   display: flex;
   gap: 10px;

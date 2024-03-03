@@ -5,6 +5,7 @@ import { Food } from "./food.js";
 class Game {
   container = document.querySelector('.container');
   board = document.querySelector(".board__game");
+  boardPause = document.querySelector('.board-pause');
   details = document.querySelector('.details');
   startModal = document.querySelector('.board-start');
   defeatModal = document.querySelector('.board-defeat');
@@ -158,13 +159,18 @@ class Game {
       if (!this.stop) {
         this.stop = true;
         this.buttonPause.style.backgroundImage = 'url(../images/play.svg';
-        this.board.classList.add('board_game_paused');
+        // this.board.classList.add('board_game_paused');
+        this.boardPause.classList.add('board-pause_visibile');
+        this.board.classList.add('board__game_blured');
+
       } else {
         this.stop = false;
         this.board.classList.remove('board_game_paused');
         this.snake.newDirectionBuffer = [];
         this.start(0);
         this.buttonPause.style.backgroundImage = 'url(../images/pause.svg';
+        this.boardPause.classList.remove('board-pause_visibile');
+        this.board.classList.remove('board__game_blured');
       }
     });
     this.buttonReset.addEventListener('click', () => {
@@ -173,6 +179,8 @@ class Game {
       this.board.classList.add('board_hidden');
       this.details.classList.add('details_hidden');
       this.board.classList.remove('board_game_paused');
+      this.boardPause.classList.remove('board-pause_visibile');
+      this.board.classList.remove('board__game_blured');
       this.buttonPause.style.backgroundImage = 'url(../images/pause.svg';
     });
     this.defeatModal.addEventListener('click', (evt) => {
