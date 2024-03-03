@@ -10,11 +10,11 @@
   </head>
   <body>
     <div class="container">
-      <h1>Snake Game</h1>
+      <h1 class="title">Snake Game</h1>
       <div class="board">
         <div class="board__game board_hidden"></div>
         <div class="board-start board-modal">
-          <h2 class="board__title">Choose difficulty</h2>
+          <h2 class="title">Choose difficulty</h2>
           <div class="board-start__button-container">
             <button type="submit" class="button button_start button_start_easy">Easy</button>
             <button type="submit" class="button button_start button_start_medium">Medium</button>
@@ -22,7 +22,7 @@
           </div>
         </div>
         <div class="board-defeat board-modal board_hidden">
-          <h2 class="board__title">You've lost.</h2>
+          <h2 class="title">You've lost.</h2>
           <p class="board__text">Your score: <span class="board__score"></span></p>
           <p class="board__text">Click here to restart</p>
         </div>
@@ -30,8 +30,8 @@
       </div>
       <div class="details details_hidden">
         <div class="details__button-container">
-          <button class="button button_pause" title="pause/play"></button>
-          <button class="button button_reset" title="reset"></button>
+          <button class="button button_details button_details_pause" title="pause/play"></button>
+          <button class="button button_details button_details_reset" title="reset"></button>
         </div>
         <p class="score">Score: <span class="score__span">0</span></p>
       </div>

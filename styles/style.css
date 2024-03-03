@@ -9,14 +9,20 @@ body {
   block-size: 100vh;
 }
 
+.title {
+  font-weight: 400;
+  font-size: clamp(1.875rem, 1.127rem + 3.191vw, 2.813rem);
+  text-align: center;
+}
+
 .container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 20px;
-  inline-size: 800px;
-  inline-size: 40%;
+  max-inline-size: 800px;
+  inline-size: min(690px, 95%);
 }
 
 .container_hidden {
@@ -36,7 +42,7 @@ body {
   inline-size: 100%;
   block-size: 100%;
   position: relative;
-  gap: 4px;
+  gap: clamp(0.125rem, 0.025rem + 0.426vw, 0.25rem);
   padding: 1px;
 }
 
@@ -45,7 +51,7 @@ body {
 }
 
 .board__game__item {
-  border-radius: 8px;
+  border-radius: clamp(0.25rem, 0.051rem + 0.851vw, 0.5rem);
   background-color: #282828;
 }
 
@@ -66,14 +72,8 @@ body {
   gap: 70px;
 }
 
-.board__title {
-  font-weight: 400;
-  font-size: 85px;
-  text-align: center;
-}
-
 .board__text {
-  /* font-size: ; */
+  font-size: clamp(1.25rem, 0.901rem + 1.489vw, 1.688rem);
 }
 
 .board-defeat {
@@ -94,15 +94,19 @@ body {
   visibility: visible;
 }
 .board-start__button-container {
-  display: flex;
-  gap: 10px;
+  display: grid;
+  grid-template-columns: repeat(3, min-content);
+  justify-content: center;
+  gap: clamp(1.25rem, 0.751rem + 2.128vw, 1.875rem);
+  padding-inline: 10px;
+  inline-size: 100%;
 }
 
 .button {
   appearance: none;
   background-color: transparent;
   border: none;
-  border-radius: 23px;
+  border-radius: 18px;
   background-size: 60%;
   background-position: center;
   background-repeat: no-repeat;
@@ -115,21 +119,20 @@ body {
 
 .button_start {
   padding: 2px 20px;
-  /* inline-size: 310px; */
-  font-size: 65px;
+  font-size: 50px;
+  font-size: clamp(1.563rem, 0.852rem + 3.03vw, 3.125rem);
 }
 
-.button_pause {
-  min-inline-size: 50px;
-  min-block-size: 50px;
+.button_details {
+  inline-size: clamp(2.188rem, 1.439rem + 3.191vw, 3.125rem);
   border-radius: 100%;
+}
+
+.button_details_pause {
   background-image: url('../images/pause.svg');
 }
 
-.button_reset {
-  min-inline-size: 50px;
-  min-block-size: 50px;
-  border-radius: 100%;
+.button_details_reset {
   background-image: url('../images/reset.svg');
 }
 
@@ -145,15 +148,16 @@ body {
 }
 
 .details__button-container {
-  display: flex;
+  display: grid;
+  grid-template-columns: min-content max-content;
   justify-content: flex-start;
-  gap: 30px;
+  gap: clamp(0.625rem, -0.372rem + 4.255vw, 1.875rem);
   grid-area: details__button-container;
 }
 
 
 .score {
-  font-size: 42px;
+  font-size: clamp(1.438rem, 1.088rem + 1.489vw, 1.875rem);
   grid-area: score;
   justify-self: center;
 }

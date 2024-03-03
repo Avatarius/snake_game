@@ -12,8 +12,8 @@ class Game {
   buttonEasy = document.querySelector('.button_start_easy');
   buttonMedium = document.querySelector('.button_start_medium');
   buttonHard = document.querySelector('.button_start_hard');
-  buttonPause = document.querySelector('.button_pause');
-  buttonReset = document.querySelector('.button_reset');
+  buttonPause = document.querySelector('.button_details_pause');
+  buttonReset = document.querySelector('.button_details_reset');
   scoreSpan = document.querySelector(".score__span");
   boardScoreSpan = document.querySelector('.board__score');
   stop = false;
