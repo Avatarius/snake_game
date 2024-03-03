@@ -137,6 +137,10 @@ body {
   background-image: url("../images/pause.svg");
 }
 
+.details__button_play {
+  background-image: url("../images/play.svg");
+}
+
 .details__button_reset {
   background-image: url("../images/reset.svg");
   background-size: 50%;
