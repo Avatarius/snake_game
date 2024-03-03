@@ -5,6 +5,7 @@ import { Food } from "./food.js";
 class Game {
   container = document.querySelector('.container');
   board = document.querySelector(".board__game");
+  details = document.querySelector('.details');
   startModal = document.querySelector('.board-start');
   defeatModal = document.querySelector('.board-defeat');
   buttonEasy = document.querySelector('.button_start_easy');
@@ -13,6 +14,7 @@ class Game {
   buttonPause = document.querySelector('.button_pause');
   buttonReset = document.querySelector('.button_reset');
   scoreSpan = document.querySelector(".score__span");
+  boardScoreSpan = document.querySelector('.board__score');
   stop = false;
   lastTimeRendered = 0;
   speed = 6;
@@ -39,7 +41,9 @@ class Game {
     this.update();
     if (this.checkDefeat()) {
       this.stop = true;
+      this.boardScoreSpan.textContent = this.score;
       this.board.classList.add('board_hidden');
+      this.details.classList.add('details_hidden');
       this.defeatModal.classList.remove('board_hidden');
       return;
     }
@@ -108,7 +112,10 @@ class Game {
 
   draw() {
     const snakeElements = this.board.querySelectorAll(".snake");
-    snakeElements.forEach((item) => item.classList.remove('snake'));
+    snakeElements.forEach((item) => {
+      item.classList.remove('snake');
+      item.classList.remove('snake__head');
+    });
     this.snake.draw(this.board);
 
     const foodElement = this.board.querySelector(".food");
@@ -138,9 +145,11 @@ class Game {
         }
         this.setSpeed(speed);
         this.snake.reset();
+        this.food = null;
         this.stop = false;
         this.start(0);
         this.startModal.classList.add('board_hidden')
+        this.details.classList.remove('details_hidden');
         this.board.classList.remove('board_hidden');
         this.updateScore(true);
       })
@@ -162,6 +171,7 @@ class Game {
       this.stop = true;
       this.startModal.classList.remove('board_hidden');
       this.board.classList.add('board_hidden');
+      this.details.classList.add('details_hidden');
       this.board.classList.remove('board_game_paused');
       this.buttonPause.style.backgroundImage = 'url(../images/pause.svg';
     });
