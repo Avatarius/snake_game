@@ -174,13 +174,13 @@ difficultyButtons.forEach((button) => {
     let speed;
     switch (evt.target) {
       case buttonEasy:
-        speed = 5;
+        speed = 2;
         break;
       case buttonMedium:
-        speed = 10;
+        speed = 6;
         break;
       case buttonHard:
-        speed = 15;
+        speed = 10;
         break;
     }
     menuStart.classList.add("hidden");

@@ -17,6 +17,7 @@ class Snake {
   }
 
   update() {
+    this.changeDirection();
     let previousPosX = this.snakePositionArray.at(0).x;
     let previousPosY = this.snakePositionArray.at(0).y;
     this.tailPosX = this.snakePositionArray.at(-1).x;
@@ -38,7 +39,6 @@ class Snake {
         previousPosY = currentPosY;
       }
     });
-    this.changeDirection();
   }
 
   draw(board) {
